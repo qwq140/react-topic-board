@@ -1,14 +1,18 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import CustomButton from "../../../components/CustomButton";
-import api from "../../../api/api";
 import {useNavigate} from "react-router-dom";
 import ErrorDialog from "../../../components/ErrorDialog";
 
-const PostForm = ({boardId}) => {
-    const navigate = useNavigate();
-    const [title, setTitle] = useState('');
-    const [content, setContent] = useState('');
+const PostForm = ({onSubmit, initialTitle = '', initialContent = '', boardId}) => {
+    const [title, setTitle] = useState(initialTitle);
+    const [content, setContent] = useState(initialContent);
     const [error, setError] = useState('');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        setTitle(initialTitle);
+        setContent(initialContent);
+    }, [initialTitle, initialContent]);
 
     const handleSubmit = async () => {
         if(!title.trim()) {
@@ -21,22 +25,23 @@ const PostForm = ({boardId}) => {
         }
 
         try {
-            await api.post(`/boards/${boardId}/posts`, {title, content});
+            await onSubmit({title, content});
             navigate(`/board/${boardId}`);
         } catch (e) {
-            if(e.response.data.errorCode === "VALIDATION-001"){
-                const validationErrorData = e.response.data.data;
-                const errorMessage = validationErrorData[Object.keys(validationErrorData)[0]];
-                setError(errorMessage);
-            } else {
-                if(e.response.data.message) {
-                    setError(e.response.data.message);
+            if(e.response && e.response.data) {
+                if(e.response.data.errorCode === "VALIDATION-001") {
+                    const validationErrorData = e.response.data.data;
+                    const errorMessage = validationErrorData[Object.keys(validationErrorData)[0]];
+                    setError(errorMessage);
                 } else {
-                    setError('게시글 작성 중 오류가 발생하였습니다. 잠시 후 시도해주세요');
+                    setError(e.response.data.message || '처리 중 오류가 발생했습니다.');
                 }
+            } else {
+                setError('처리 중 오류가 발생했습니다.');
             }
-
         }
+
+
     }
 
     const handleCloseErrorDialog = () => setError('');

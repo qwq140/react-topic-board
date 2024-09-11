@@ -3,9 +3,8 @@ import api from "../../../api/api";
 import CommentForm from "./CommentForm";
 import {useAuth} from "../../../context/AuthContext";
 
-const CommentList = ({ postId }) => {
+const CommentList = ({ postId, handleError}) => {
     const [comments, setComments] = useState([]);
-    const [error, setError] = useState(null);
 
     const {state : authState} = useAuth();
 
@@ -17,8 +16,12 @@ const CommentList = ({ postId }) => {
                 if(!ignore) {
                     setComments(response.data.data.comments);
                 }
-            } catch (err) {
-                setError('댓글을 불러오는 중 오류가 발생했습니다.');
+            } catch (e) {
+                let errorMessage = '댓글을 불러오는 중 오류가 발생했습니다.';
+                if(e.response.data && e.response.data.message) {
+                    errorMessage = e.response.data.message;
+                }
+                handleError(errorMessage);
             }
         };
 
@@ -32,10 +35,6 @@ const CommentList = ({ postId }) => {
 
     const handleCommentAdd = (newComment) => {
         setComments([...comments, newComment]);
-    }
-
-    if (error) {
-        return <div>{error}</div>;
     }
 
     return (

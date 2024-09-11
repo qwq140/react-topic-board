@@ -10,7 +10,7 @@ const ProtectedRoute = ({children, requiredRole}) => {
     }
 
     // 필요한 권한이 없는 경우 접근 차단
-    if(requiredRole && state.user.role !== requiredRole) {
+    if(requiredRole && !state.user.roles.includes(requiredRole)) {
         return <Navigate to='/' replace />
     }
 

@@ -6,7 +6,7 @@ import PostTable from "./PostTable";
 import CustomButton from "../../../components/CustomButton";
 import {useAuth} from "../../../context/AuthContext";
 
-const BoardDetailContent = ({boardId}) => {
+const BoardDetailContent = ({boardId, handleError}) => {
     const [posts, setPosts] = useState([]);
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
@@ -29,7 +29,13 @@ const BoardDetailContent = ({boardId}) => {
                     setTotalPages(totalPages);
                 }
             } catch (e) {
-                console.log(e);
+                if(!ignore) {
+                    let errorMessage = '게시글 목록을 불러오는 중 오류가 발생하였습니다.';
+                    if(e.response.data && e.response.data.message) {
+                        errorMessage = e.response.data.message;
+                    }
+                    handleError(errorMessage);
+                }
             }
 
         }

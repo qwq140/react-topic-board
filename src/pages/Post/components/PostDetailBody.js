@@ -5,11 +5,14 @@ import CustomButton from "../../../components/CustomButton";
 import {useAuth} from "../../../context/AuthContext";
 import CommentList from "./CommentList";
 import ErrorDialog from "../../../components/ErrorDialog";
+import {useErrorHandler} from "../../../error/useErrorHandler";
 
 const PostDetailBody = ({postId}) => {
     const navigate = useNavigate();
     const [post, setPost] = useState(null); // 게시글 상태
     const [error, setError] = useState(null); // 오류 상태
+
+    const handleError = useErrorHandler();
 
     const {state : authState} = useAuth();
 
@@ -23,10 +26,12 @@ const PostDetailBody = ({postId}) => {
                 if(!ignore) {
                     setPost(response.data.data);
                 }
-            } catch (err) {
-                if(err.status !== 404) {
-                    setError('게시글을 불러오는 중 오류가 발생했습니다.');
+            } catch (e) {
+                let errorMessage = '게시글을 불러오는 중 오류가 발생했습니다.';
+                if(e.response.data && e.response.data.message) {
+                    errorMessage = e.response.data.message;
                 }
+                handleError(errorMessage);
             }
         };
 
@@ -44,14 +49,14 @@ const PostDetailBody = ({postId}) => {
             alert('게시글이 삭제되었습니다.');
             navigate('/'); // 메인 페이지로 이동
         } catch (err) {
-            alert('게시글을 삭제하는 중 오류가 발생했습니다.');
+            setError('게시글을 삭제하는 중 오류가 발생했습니다.');
         }
     };
 
     return (
         <div className='p-4'>
             <ErrorDialog message={error} onClose={() => setError(null)}/>
-            {post ? (
+            {post && (
                 <>
                     <h1 className='text-2xl font-bold mb-4'>{post.title}</h1>
                     <p className='text-sm text-gray-600 mb-2'>
@@ -62,13 +67,11 @@ const PostDetailBody = ({postId}) => {
                     </div>
                     <div className='mt-4 flex justify-end space-x-2'>
                         <CustomButton onClick={() => navigate(`/board/${post.board.id}`)}>목록</CustomButton>
-                        {authState.isAuth && authState.user.id === post.author.id && <CustomButton onClick={() => navigate(`/posts/edit/${postId}`)} className="bg-green-500 text-white hover:bg-green-600">수정</CustomButton>}
+                        {authState.isAuth && authState.user.id === post.author.id && <CustomButton onClick={() => navigate(`/post/${postId}/edit`)} className="bg-green-500 text-white hover:bg-green-600">수정</CustomButton>}
                         {authState.isAuth && authState.user.id === post.author.id && <CustomButton onClick={handleDelete} className="bg-red-500 text-white hover:bg-red-600">삭제</CustomButton>}
                     </div>
-                    <CommentList postId={postId}/>
+                    <CommentList postId={postId} handleError={handleError}/>
                 </>
-            ) : (
-                <div>게시글이 존재하지 않습니다.</div>
             )}
         </div>
     );

@@ -1,16 +1,16 @@
 import {useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
 import BoardDetailInfo from "../../components/BoardDetailInfo";
-import PostTable from "./components/PostTable";
 import BoardDetailContent from "./components/BoardDetailContent";
+import {useErrorHandler} from "../../error/useErrorHandler";
 
 const BoardDetail = () => {
     const {boardId} = useParams();
+    const handleError = useErrorHandler();
 
     return (
         <div className='max-w-6xl mx-auto bg-white w-full p-4'>
-            <BoardDetailInfo boardId={boardId}/>
-            <BoardDetailContent boardId={boardId}/>
+            <BoardDetailInfo boardId={boardId} handleError={handleError}/>
+            <BoardDetailContent boardId={boardId} handleError={handleError}/>
         </div>
     );
 }
