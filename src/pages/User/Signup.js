@@ -48,7 +48,7 @@ const Signup = () => {
     }
 
     return (
-        <div className="flex items-center justify-center bg-gray-50 pt-6">
+        <div className="flex items-center justify-center bg-gray-50 pt-6 w-full">
             <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
                 <h2 className="text-2xl font-bold mb-6">회원가입</h2>
                 <form onSubmit={handleSignup} className="space-y-4">
