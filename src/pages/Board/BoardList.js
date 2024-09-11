@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
-import api from "../api/api";
-import BoardListItem from "../components/BoardListItem";
+import api from "../../api/api";
+import BoardListItem from "./components/BoardListItem";
 
-const Home = () => {
+const BoardList = () => {
 
     const [boards, setBoards] = useState([]);
 
@@ -40,4 +40,4 @@ const Home = () => {
 }
 
 
-export default Home;
+export default BoardList;
