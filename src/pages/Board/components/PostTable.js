@@ -28,7 +28,7 @@ const PostTable = ({posts, boardId}) => {
                 <tr
                     key={post.id}
                     className="hover:bg-gray-100 cursor-pointer"
-                    onClick={() => navigate(`/board/${boardId}/post/${post.id}`)}
+                    onClick={() => navigate(`/post/${post.id}`)}
                 >
                     <td className="px-6 py-4 text-sm text-gray-900">{post.title}</td>
                     <td className="px-6 py-4 text-center text-sm text-gray-900">{post.author.nickname}</td>

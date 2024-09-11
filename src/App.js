@@ -9,6 +9,7 @@ import BoardDetail from "./pages/Board/BoardDetail";
 import PostWrite from "./pages/Post/PostWrite";
 import ProtectedRoute from "./route/ProtectedRoute";
 import {useContext} from "react";
+import PostDetail from "./pages/Post/PostDetail";
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                                     <PostWrite/>
                                 </ProtectedRoute>
                             }/>
+                            <Route path="/post/:postId" element={<PostDetail/>}/>
                         </Routes>
                     </div>
                 </div>
