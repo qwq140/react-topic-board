@@ -3,9 +3,12 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Signup from "./pages/User/Signup";
 import Login from "./pages/User/Login";
 import BoardList from "./pages/Board/BoardList";
-import {AuthProvider} from "./context/AuthContext";
+import {AuthContext, AuthProvider} from "./context/AuthContext";
 import Header from "./components/Header";
 import BoardDetail from "./pages/Board/BoardDetail";
+import PostWrite from "./pages/Post/PostWrite";
+import ProtectedRoute from "./route/ProtectedRoute";
+import {useContext} from "react";
 
 function App() {
     return (
@@ -19,6 +22,11 @@ function App() {
                             <Route path="/board/:boardId" element={<BoardDetail/>}/>
                             <Route path="/signup" element={<Signup/>}/>
                             <Route path="/login" element={<Login/>}/>
+                            <Route path="/board/:boardId/post/write" element={
+                                <ProtectedRoute>
+                                    <PostWrite/>
+                                </ProtectedRoute>
+                            }/>
                         </Routes>
                     </div>
                 </div>

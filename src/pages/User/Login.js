@@ -43,7 +43,7 @@ const Login = () => {
     return (
         <div className="flex items-center justify-center bg-gray-50 pt-6 w-full">
             <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
-                <h2 className="text-2xl font-bold mb-6">회원가입</h2>
+                <h2 className="text-2xl font-bold mb-6">로그인</h2>
                 <form onSubmit={handleLogin} className="space-y-4">
                     <div>
                         <label htmlFor="username" className="block text-sm font-medium text-gray-700">아이디</label>

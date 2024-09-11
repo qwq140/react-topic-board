@@ -18,6 +18,8 @@ const authReducer = (state, action) => {
         case 'LOGOUT':
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
+            localStorage.removeItem('isAuth');
+            localStorage.removeItem('user');
             return {
                 isAuth : false,
                 user : null,
@@ -28,7 +30,7 @@ const authReducer = (state, action) => {
 }
 
 // 컨텍스트 생성
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
     const [state, dispatch] = useReducer(authReducer, initialState);

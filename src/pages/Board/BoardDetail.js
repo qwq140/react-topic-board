@@ -1,6 +1,6 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
-import BoardDetailInfo from "./components/BoardDetailInfo";
+import BoardDetailInfo from "../../components/BoardDetailInfo";
 import PostTable from "./components/PostTable";
 import BoardDetailContent from "./components/BoardDetailContent";
 
