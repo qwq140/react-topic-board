@@ -24,8 +24,7 @@ const Header = () => {
                             </Link>
                         </div>
                         <div className="flex items-center space-x-1">
-                            <Link to="#" className="py-5 px-3 text-white hover:text-gray-300">메뉴1</Link>
-                            <Link to="#" className="py-5 px-3 text-white hover:text-gray-300">메뉴2</Link>
+                            {state.user && state.user.roles.includes('ADMIN') && <Link to="/board/create" className="py-5 px-3 text-white hover:text-gray-300">게시판 등록</Link>}
                         </div>
                     </div>
                     <div className="flex items-center space-x-1">

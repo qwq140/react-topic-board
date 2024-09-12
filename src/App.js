@@ -10,6 +10,7 @@ import PostWrite from "./pages/Post/PostWrite";
 import ProtectedRoute from "./route/ProtectedRoute";
 import PostDetail from "./pages/Post/PostDetail";
 import PostEdit from "./pages/Post/PostEdit";
+import BoardCreate from "./pages/Board/BoardCreate";
 
 function App() {
     return (
@@ -34,6 +35,11 @@ function App() {
                                 </ProtectedRoute>
                             }/>
                             <Route path="/post/:postId" element={<PostDetail/>}/>
+                            <Route path="/board/create" element={
+                                <ProtectedRoute requiredRole="ADMIN">
+                                    <BoardCreate/>
+                                </ProtectedRoute>
+                            }/>
                         </Routes>
                     </div>
                 </div>
