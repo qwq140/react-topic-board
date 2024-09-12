@@ -11,6 +11,7 @@ import ProtectedRoute from "./route/ProtectedRoute";
 import PostDetail from "./pages/Post/PostDetail";
 import PostEdit from "./pages/Post/PostEdit";
 import BoardCreate from "./pages/Board/BoardCreate";
+import BoardManagement from "./pages/Board/BoardManagement";
 
 function App() {
     return (
@@ -38,6 +39,11 @@ function App() {
                             <Route path="/board/create" element={
                                 <ProtectedRoute requiredRole="ADMIN">
                                     <BoardCreate/>
+                                </ProtectedRoute>
+                            }/>
+                            <Route path="/board/management" element={
+                                <ProtectedRoute requiredRole="ADMIN">
+                                    <BoardManagement/>
                                 </ProtectedRoute>
                             }/>
                         </Routes>
