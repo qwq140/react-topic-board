@@ -1,10 +1,6 @@
-import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import api from "../../../api/api";
-import Pagination from "./Pagination";
-import {post} from "axios";
 
-const PostTable = ({posts, boardId}) => {
+const PostTable = ({posts}) => {
 
     const navigate = useNavigate();
 

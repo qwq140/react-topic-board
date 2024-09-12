@@ -19,7 +19,7 @@ const BoardList = () => {
             } catch (e) {
                 if(!ignore) {
                     let errorMessage = '게시판 목록을 불러오는 중 에러가 발생하였습니다.';
-                    if(e.response.data && e.response.data.message) {
+                    if(e.response && e.response.data && e.response.data.message) {
                         errorMessage = e.response.data.message;
                     }
                     alert(errorMessage);

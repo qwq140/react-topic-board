@@ -26,17 +26,18 @@ const CommentForm = ({postId, onCommentAdded}) => {
             setComment('');
             onCommentAdded(response.data.data);
         } catch (e) {
-            if(e.response.data.errorCode === "VALIDATION-001"){
-                const validationErrorData = e.response.data.data;
-                const errorMessage = validationErrorData[Object.keys(validationErrorData)[0]];
-                setError(errorMessage);
-            } else {
-                if(e.response.data.message) {
-                    setError(e.response.data.message);
+            if(e.response && e.response.data) {
+                if(e.response.data.errorCode === "VALIDATION-001"){
+                    const validationErrorData = e.response.data.data;
+                    const errorMessage = validationErrorData[Object.keys(validationErrorData)[0]];
+                    setError(errorMessage);
                 } else {
-                    setError('댓글을 작성하는 중 오류가 발생했습니다.');
+                    setError(e.response.data.message || '처리 중 오류가 발생했습니다.');
                 }
+            } else {
+                setError("처리 중 오류가 발생했습니다.");
             }
+
         } finally {
             setIsSubmitting(false);
         }

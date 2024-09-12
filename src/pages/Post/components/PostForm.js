@@ -26,7 +26,6 @@ const PostForm = ({onSubmit, initialTitle = '', initialContent = '', boardId}) =
 
         try {
             await onSubmit({title, content});
-            navigate(`/board/${boardId}`);
         } catch (e) {
             if(e.response && e.response.data) {
                 if(e.response.data.errorCode === "VALIDATION-001") {

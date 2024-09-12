@@ -7,9 +7,16 @@ import {useErrorHandler} from "../../error/useErrorHandler";
 const PostWrite = () => {
     const {boardId} = useParams();
     const handleError = useErrorHandler();
+    const navigate = useNavigate();
 
     const handlePostSubmit = async (data) => {
-        return api.post(`/boards/${boardId}/posts`, data);
+        try {
+            await api.post(`/boards/${boardId}/posts`, data);
+            navigate(`/board/${boardId}`)
+        } catch (e) {
+            throw e;
+        }
+
     }
 
     return (

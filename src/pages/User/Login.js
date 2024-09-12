@@ -29,13 +29,20 @@ const Login = () => {
                 } else {
                     localStorage.removeItem("accessToken");
                     localStorage.removeItem("refreshToken");
-                    alert("로그인에 실패하였습니다. 잠시 후 다시 시도해주세요");
+                    alert("로그인 중 오류가 발생하였습니다. 잠시 후 다시 시도해주세요");
                 }
             }
-        } catch (error) {
-            if(error.response.data) {
-                let errorData = error.response.data;
-                alert(errorData.message);
+        } catch (e) {
+            if(e.response && e.response.data) {
+                if(e.response.data.errorCode === "VALIDATION-001") {
+                    const validationErrorData = e.response.data.data;
+                    const errorMessage = validationErrorData[Object.keys(validationErrorData)[0]];
+                    alert(errorMessage);
+                } else {
+                    alert(e.response.data.message || '로그인 중 오류가 발생하였습니다. 잠시 후 다시 시도해주세요.');
+                }
+            } else {
+                alert('로그인 중 오류가 발생하였습니다. 잠시 후 다시 시도해주세요.');
             }
         }
     };

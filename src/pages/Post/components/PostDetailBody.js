@@ -28,7 +28,7 @@ const PostDetailBody = ({postId}) => {
                 }
             } catch (e) {
                 let errorMessage = '게시글을 불러오는 중 오류가 발생했습니다.';
-                if(e.response.data && e.response.data.message) {
+                if(e.response && e.response.data && e.response.data.message) {
                     errorMessage = e.response.data.message;
                 }
                 handleError(errorMessage);
