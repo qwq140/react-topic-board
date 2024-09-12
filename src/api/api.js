@@ -39,6 +39,8 @@ api.interceptors.response.use(
 
                     localStorage.removeItem("accessToken");
                     localStorage.removeItem("refreshToken");
+                    localStorage.removeItem("isAuth");
+                    localStorage.removeItem("user");
 
                     alert("로그인을 다시 해주세요");
                     window.location.href = '/login';

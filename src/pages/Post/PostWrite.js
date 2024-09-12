@@ -11,8 +11,9 @@ const PostWrite = () => {
 
     const handlePostSubmit = async (data) => {
         try {
-            await api.post(`/boards/${boardId}/posts`, data);
-            navigate(`/board/${boardId}`)
+            const response = await api.post(`/boards/${boardId}/posts`, data);
+            const responseData = response.data.data;
+            navigate(`/post/${responseData.id}`);
         } catch (e) {
             throw e;
         }

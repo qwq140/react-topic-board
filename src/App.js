@@ -3,13 +3,13 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Signup from "./pages/User/Signup";
 import Login from "./pages/User/Login";
 import BoardList from "./pages/Board/BoardList";
-import {AuthContext, AuthProvider} from "./context/AuthContext";
+import {AuthProvider} from "./context/AuthContext";
 import Header from "./components/Header";
 import BoardDetail from "./pages/Board/BoardDetail";
 import PostWrite from "./pages/Post/PostWrite";
 import ProtectedRoute from "./route/ProtectedRoute";
-import {useContext} from "react";
 import PostDetail from "./pages/Post/PostDetail";
+import PostEdit from "./pages/Post/PostEdit";
 
 function App() {
     return (
@@ -26,6 +26,11 @@ function App() {
                             <Route path="/board/:boardId/post/write" element={
                                 <ProtectedRoute>
                                     <PostWrite/>
+                                </ProtectedRoute>
+                            }/>
+                            <Route path="/post/:postId/edit" element={
+                                <ProtectedRoute>
+                                    <PostEdit/>
                                 </ProtectedRoute>
                             }/>
                             <Route path="/post/:postId" element={<PostDetail/>}/>
