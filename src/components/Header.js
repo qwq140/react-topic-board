@@ -3,13 +3,11 @@ import {Link, useNavigate} from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const Header = () => {
-    const { state, dispatch } = useAuth();
+    const { isAuthenticated, user, logout } = useAuth();
     const navigate = useNavigate();
 
     function handleLogout() {
-        dispatch({
-           type : 'LOGOUT'
-        });
+        logout();
         navigate('/');
     }
 
@@ -24,7 +22,7 @@ const Header = () => {
                             </Link>
                         </div>
                         <div className="flex items-center space-x-1">
-                            {state.user && state.user.roles.includes('ADMIN') && (
+                            {user && user.roles.includes('ADMIN') && (
                                 <>
                                     <Link to="/board/create" className="py-5 px-3 text-white hover:text-gray-300">게시판 등록</Link>
                                     <Link to="/board/management" className="py-5 px-3 text-white hover:text-gray-300">게시판 관리</Link>
@@ -33,13 +31,13 @@ const Header = () => {
                         </div>
                     </div>
                     <div className="flex items-center space-x-1">
-                        {!state.isAuth && (
+                        {!isAuthenticated && (
                             <>
                                 <Link to="/login" className="py-5 px-3 text-white hover:text-gray-300">Login</Link>
                                 <Link to="/signup" className="py-5 px-3 text-white hover:text-gray-300">Signup</Link>
                             </>
                         )}
-                        {state.isAuth && (
+                        {isAuthenticated && (
                             <div className="py-5 px-3 text-white hover:text-gray-300 cursor-pointer" onClick={handleLogout}>Logout</div>
                         )}
                     </div>

@@ -12,7 +12,7 @@ const BoardDetailContent = ({boardId, handleError}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
 
-    const {state : authState} = useAuth();
+    const {isAuthenticated} = useAuth();
 
     useEffect(() => {
         let ignore = false;
@@ -55,7 +55,7 @@ const BoardDetailContent = ({boardId, handleError}) => {
     return (
         <div>
             <PostTable posts={posts} boardId={boardId}/>
-            {authState.isAuth && <div className='mt-3 flex justify-end'>
+            {isAuthenticated && <div className='mt-3 flex justify-end'>
                 <CustomButton onClick={() => navigate(`/board/${boardId}/post/write`)}>글쓰기</CustomButton>
             </div>}
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange}/>

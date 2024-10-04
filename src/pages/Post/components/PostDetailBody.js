@@ -14,7 +14,7 @@ const PostDetailBody = ({postId}) => {
 
     const handleError = useErrorHandler();
 
-    const {state : authState} = useAuth();
+    const {isAuthenticated, user} = useAuth();
 
     useEffect(() => {
 
@@ -67,8 +67,8 @@ const PostDetailBody = ({postId}) => {
                     </div>
                     <div className='mt-4 flex justify-end space-x-2'>
                         <CustomButton onClick={() => navigate(`/board/${post.board.id}`)}>목록</CustomButton>
-                        {authState.isAuth && authState.user.id === post.author.id && <CustomButton onClick={() => navigate(`/post/${postId}/edit`)} className="bg-green-500 text-white hover:bg-green-600">수정</CustomButton>}
-                        {authState.isAuth && authState.user.id === post.author.id && <CustomButton onClick={handleDelete} className="bg-red-500 text-white hover:bg-red-600">삭제</CustomButton>}
+                        {isAuthenticated && user.id === post.author.id && <CustomButton onClick={() => navigate(`/post/${postId}/edit`)} className="bg-green-500 text-white hover:bg-green-600">수정</CustomButton>}
+                        {isAuthenticated && user.id === post.author.id && <CustomButton onClick={handleDelete} className="bg-red-500 text-white hover:bg-red-600">삭제</CustomButton>}
                     </div>
                     <CommentList postId={postId} handleError={handleError}/>
                 </>

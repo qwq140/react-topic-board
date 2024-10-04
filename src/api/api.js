@@ -11,7 +11,7 @@ const api = axios.create({
 });
 
 
-const handleUnauthorized = async (error, originalRequest, authDispatch) => {
+const handleUnauthorized = async (error, originalRequest, logout) => {
     const refreshToken = localStorage.getItem("refreshToken");
     if(refreshToken) {
         try {
@@ -25,13 +25,13 @@ const handleUnauthorized = async (error, originalRequest, authDispatch) => {
             originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
             return api(originalRequest);
         } catch (e) {
-            authDispatch({type:"LOGOUT"});
+            logout();
 
             alert("로그인을 다시 해주세요");
             window.location.href = '/login';
         }
     } else {
-        authDispatch({type:"LOGOUT"});
+        logout();
 
         alert("로그인을 해주세요");
         window.location.href = "/login";
@@ -39,7 +39,7 @@ const handleUnauthorized = async (error, originalRequest, authDispatch) => {
 }
 
 export const useAxiosInterceptors = () => {
-    const {dispatch} = useAuth();
+    const {logout} = useAuth();
 
     api.interceptors.request.use((config) => {
         const token = localStorage.getItem('accessToken');
@@ -57,7 +57,7 @@ export const useAxiosInterceptors = () => {
             const originalRequest = error.config;
             if(error.response && error.response.status === 401 && !originalRequest._retry) {
                 originalRequest._retry = true;
-                return handleUnauthorized(error, originalRequest, dispatch);
+                return handleUnauthorized(error, originalRequest, logout);
             }
             return Promise.reject(error);
         }

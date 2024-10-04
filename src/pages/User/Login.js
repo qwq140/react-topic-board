@@ -9,7 +9,7 @@ const Login = () => {
 
     const navigate = useNavigate();
 
-    const {state, dispatch} = useAuth();
+    const {login} = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -24,7 +24,7 @@ const Login = () => {
 
                 if(myDataResponse.data.code === 200) {
                     const user = myDataResponse.data.data;
-                    dispatch({type : 'LOGIN', payload : {user}});
+                    login(user);
                     navigate('/');
                 } else {
                     localStorage.removeItem("accessToken");

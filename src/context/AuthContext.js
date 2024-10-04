@@ -1,42 +1,25 @@
-import {createContext, useContext, useReducer} from "react";
-
-const initialState = {
-    isAuth : localStorage.getItem('isAuth') || false,
-    user : JSON.parse(localStorage.getItem('user')) || null,
-};
-
-// 리듀서 함수
-const authReducer = (state, action) => {
-    switch (action.type) {
-        case 'LOGIN':
-            localStorage.setItem('isAuth', true);
-            localStorage.setItem('user', JSON.stringify(action.payload.user));
-            return {
-                isAuth : true,
-                user: action.payload.user,
-            };
-        case 'LOGOUT':
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
-            localStorage.removeItem('isAuth');
-            localStorage.removeItem('user');
-            return {
-                isAuth : false,
-                user : null,
-            };
-        default :
-            return state;
-    }
-}
+import {createContext, useContext, useReducer, useState} from "react";
 
 // 컨텍스트 생성
 export const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
-    const [state, dispatch] = useReducer(authReducer, initialState);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [user, setUser] = useState(null);
+
+    const login = (userData) => {
+        setIsAuthenticated(true);
+        setUser(userData);
+    }
+
+    const logout = () => {
+        setIsAuthenticated(false);
+        setUser(null);
+    }
+
 
     return (
-        <AuthContext.Provider value={{state, dispatch}}>
+        <AuthContext.Provider value={{isAuthenticated, user, login, logout}}>
             {children}
         </AuthContext.Provider>
     )

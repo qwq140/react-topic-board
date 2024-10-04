@@ -8,7 +8,7 @@ const CommentList = ({ postId, handleError}) => {
     const [comments, setComments] = useState([]);
     const [editingComment, setEditingComment] = useState(null);
 
-    const {state : authState} = useAuth();
+    const {isAuthenticated} = useAuth();
 
     useEffect(() => {
         let ignore = false;
@@ -90,7 +90,7 @@ const CommentList = ({ postId, handleError}) => {
                                             <div className="text-sm font-semibold">{comment.author.nickname}</div>
                                             <div className="text-xs text-gray-500">{comment.createdDate}</div>
                                         </div>
-                                        {authState.isAuth && (
+                                        {isAuthenticated && (
                                             <div className='flex space-x-2'>
                                                 <button
                                                     className='text-blue-500 text-xs font-medium'
@@ -117,7 +117,7 @@ const CommentList = ({ postId, handleError}) => {
                 <div>댓글이 없습니다.</div>
             )}
 
-            {authState.isAuth && <CommentForm postId={postId} onCommentAdded={handleCommentAdd}/>}
+            {isAuthenticated && <CommentForm postId={postId} onCommentAdded={handleCommentAdd}/>}
         </div>
     );
 };
