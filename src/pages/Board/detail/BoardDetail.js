@@ -1,7 +1,7 @@
 import {useParams} from "react-router-dom";
-import BoardDetailInfo from "../../components/BoardDetailInfo";
-import BoardDetailContent from "./components/BoardDetailContent";
-import {useErrorHandler} from "../../error/useErrorHandler";
+import BoardDetailInfo from "../../../components/BoardDetailInfo";
+import BoardDetailContent from "./BoardDetailContent";
+import {useErrorHandler} from "../../../error/useErrorHandler";
 
 const BoardDetail = () => {
     const {boardId} = useParams();

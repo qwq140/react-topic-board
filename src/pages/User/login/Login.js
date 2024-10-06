@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import api from "../../api/api";
-import {useAuth} from "../../context/AuthContext";
+import api from "../../../api/api";
+import {useAuth} from "../../../context/AuthContext";
 import {useNavigate} from "react-router-dom";
 
 const Login = () => {
@@ -19,6 +19,9 @@ const Login = () => {
                 const tokenData = response.data.data;
                 localStorage.setItem("accessToken", tokenData.accessToken);
                 localStorage.setItem("refreshToken", tokenData.refreshToken);
+
+                console.log(tokenData.accessToken);
+                console.log(tokenData.refreshToken);
 
                 const myDataResponse = await api.get('/users/my');
 

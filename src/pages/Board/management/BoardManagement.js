@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import api from "../../api/api";
-import BoardManagementListItem from "./components/BoardManagementListItem";
-import ErrorDialog from "../../components/ErrorDialog";
+import api from "../../../api/api";
+import BoardManagementListItem from "./BoardManagementListItem";
+import ErrorDialog from "../../../components/ErrorDialog";
 
 const BoardManagement = () => {
 

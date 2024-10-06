@@ -55,6 +55,7 @@ export const useAxiosInterceptors = () => {
         },
         async (error) => {
             const originalRequest = error.config;
+            console.log(error.response.status);
             if(error.response && error.response.status === 401 && !originalRequest._retry) {
                 originalRequest._retry = true;
                 return handleUnauthorized(error, originalRequest, logout);

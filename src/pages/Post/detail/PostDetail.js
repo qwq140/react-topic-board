@@ -1,12 +1,14 @@
 import {useParams} from "react-router-dom";
-import PostDetailBody from "./components/PostDetailBody";
+import PostComponent from "./PostComponent";
+import CommentComponent from "./CommentComponent";
 
 const PostDetail = () => {
     const {postId} = useParams();
 
     return (
         <div className="max-w-6xl mx-auto bg-white w-full p-4">
-            <PostDetailBody postId={postId}/>
+            <PostComponent postId={postId}/>
+            <CommentComponent postId={postId}/>
         </div>
     );
 

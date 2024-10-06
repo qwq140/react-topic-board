@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import api from "../../api/api";
-import BoardListItem from "./components/BoardListItem";
+import api from "../../../api/api";
+import BoardListItem from "./BoardListItem";
 
 const BoardList = () => {
 

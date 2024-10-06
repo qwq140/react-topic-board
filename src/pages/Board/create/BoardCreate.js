@@ -1,5 +1,5 @@
-import BoardForm from "./components/BoardForm";
-import api from "../../api/api";
+import BoardForm from "./BoardForm";
+import api from "../../../api/api";
 import {useNavigate} from "react-router-dom";
 
 const BoardCreate = () => {

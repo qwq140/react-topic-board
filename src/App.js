@@ -1,19 +1,18 @@
 import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Signup from "./pages/User/Signup";
-import Login from "./pages/User/Login";
-import BoardList from "./pages/Board/BoardList";
+import Signup from "./pages/User/signup/Signup";
+import Login from "./pages/User/login/Login";
+import BoardList from "./pages/Board/list/BoardList";
 import {AuthProvider} from "./context/AuthContext";
 import Header from "./components/Header";
-import BoardDetail from "./pages/Board/BoardDetail";
-import PostWrite from "./pages/Post/PostWrite";
+import BoardDetail from "./pages/Board/detail/BoardDetail";
+import PostWrite from "./pages/Post/write/PostWrite";
 import ProtectedRoute from "./route/ProtectedRoute";
-import PostDetail from "./pages/Post/PostDetail";
-import PostEdit from "./pages/Post/PostEdit";
-import BoardCreate from "./pages/Board/BoardCreate";
-import BoardManagement from "./pages/Board/BoardManagement";
+import PostEdit from "./pages/Post/edit/PostEdit";
+import BoardCreate from "./pages/Board/create/BoardCreate";
+import BoardManagement from "./pages/Board/management/BoardManagement";
 import {useAxiosInterceptors} from "./api/api";
-import {useEffect} from "react";
+import PostDetail from "./pages/Post/detail/PostDetail";
 
 function App() {
     return (

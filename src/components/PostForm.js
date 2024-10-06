@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import CustomButton from "../../../components/CustomButton";
+import CustomButton from "./CustomButton";
 import {useNavigate} from "react-router-dom";
-import ErrorDialog from "../../../components/ErrorDialog";
+import ErrorDialog from "./ErrorDialog";
 
 const PostForm = ({onSubmit, initialTitle = '', initialContent = '', boardId}) => {
     const [title, setTitle] = useState(initialTitle);
